@@ -47,3 +47,61 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+// Add to index.js or the first page that loads with your app.
+// For Intel XDK and please add this to your app.js.
+
+document.addEventListener('deviceready', function () {
+  // Enable to debug issues.
+  // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+  
+  var notificationOpenedCallback = function(jsonData) {
+    console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+
+        navigator.notification.alert(
+            msg,
+            '',
+            titulo,
+            'Ok'
+        );
+  };
+
+  window.plugins.OneSignal
+    .startInit("c6cedf16-fce0-4aa9-883b-47ec8f2f1ef2")
+    .handleNotificationReceived(function(argument) {
+            
+        var data = argument.payload.additionalData;
+        var msg = data.msg;
+        var titulo = data.titulo;
+
+        navigator.notification.alert(
+            msg,
+            '',
+            titulo,
+            'Ok'
+        );
+    })
+    .handleNotificationOpened(function(argument) {
+        
+        var data = argument.notification.payload.additionalData;
+        var msg = data.msg;
+        var titulo = data.titulo;
+
+        /*navigator.notification.alert(
+            msg,
+            '',
+            titulo,
+            'Ok'
+        );*/
+    })
+    .endInit();
+
+    navigator.vibrate;
+
+}, false);
+
+
+
+
+
+
