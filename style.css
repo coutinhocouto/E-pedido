@@ -6,12 +6,13 @@
 @import "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css";
 @import "https://cdn.lineicons.com/2.0/LineIcons.css";
 @import "https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline;}
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {	display: block;}
-body {	line-height: 1.5; font-family: 'Balsamiq Sans', cursive;}
+body {	line-height: 1.5; font-family: 'Roboto', sans-serif; background: #EEF2F5;}
 ol, ul {}
 blockquote, q {	quotes: none;}
 blockquote:before, blockquote:after,q:before, q:after {	content: '';	content: none;}
@@ -24,9 +25,59 @@ h3 {font-size: 20px;}
 figure {max-width: 100%;}
 figcaption {background: #eee; text-align: center; padding: 5px;}
 em {font-style: italic;}
-body {min-height: 100vh;}
+body {min-height: 100vh; padding-bottom: 100px;}
 input:focus, textarea:focus, select:focus, button:focus {   outline: none;}
 img {max-width: 100%;}
+a {color: #FFB300;}
+
+footer {background: #fff;position: fixed;bottom: 0;width: 100%;	text-align: center; padding: 10px 0; box-shadow: 0 0 10px 0 #b1b1b1;}
+footer a {color: #BBBBBB; font-size: 25px;}
+footer a.big {display: block; border-radius: 50%; height: 60px; width: 60px; margin: -25px auto 0; color: #fff; padding: 10px;}
+
+header i {font-size: 30px; vertical-align: middle; margin-top: 12px; color: #343A40;}
+header a {color: #343A40;}
+header .row > div:last-child {text-align: right;}
+
+.cat-menu a {box-shadow: 0 .15rem .3rem rgba(0, 0, 0, .1) !important; border-radius: 30px; color: #212529; background-color: #fff; border-color: #dae0e5; display: inline-block; padding: .815rem 1.5rem; font-size: 12px; text-transform: uppercase; font-weight: 700; margin: 10px 0; }
+
+#sticky-wrapper {z-index: 99;}
+header { background: #EEF2F5; padding-top: 10px;}
+#main {transition: margin-left .5s;}
+
+/* --------- COLORS --------- */
+
+.product-list i, footer a.big, .sidenav {background: #FFB300;}
+.product-list .price, footer a:hover {color: #FFB300;}
+
+/* -------------------------- */
+
+.sidenav {height: 100%;  width: 0; position: fixed; z-index: 1; top: 0; left: 0; overflow-x: hidden; padding-top: 60px; transition: 0.5s;}
+.sidenav a { padding: 10px 8px 10px 20px;text-decoration: none;font-size: 15px;color: #fff;display: block;transition: 0.3s; font-weight: 700;}
+.sidenav a:hover {  color: #f1f1f1;  }  
+.sidenav .closebtn {position: absolute;    top: 0;    right: 25px;    font-size: 36px;    margin-left: 50px;  }
+.sidenav img {    max-width: 100px;    margin: 0 auto;    display: block; border-radius: 50%; border: 5px solid #fff;}
+.sidenav span {width: 35px; text-align: center; display: inline-block;}
+.sidenav h3 {color: #fff; font-weight: 700; padding: 10px 8px 10px 20px; text-decoration: underline;}
+.sidenav .user-dsk {margin-bottom: 10px;}
+.sidenav .user-dsk a {text-align: center; display: block;}
+.sidenav .side-menu { padding-bottom: 100px;}
+.sidenav .side-menu a {font-size: 20px;}
+
+.search-top {border-radius: 30px; background: url('img/search.png') no-repeat center right #fff; border-color: #ffffff; font-size: 18px; margin: 1rem 0 !important; height: calc(1.5em + 1rem + 2px);
+padding: .5rem 1rem; border: none; color: #495057; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; display: block;
+width: 100%;
+line-height: 1.5;
+}
+
+.title {margin: 15px 0;}
+.title h2 {font-size: 15px; font-weight: 700;}
+.title a {font-size: 12px; display: block; text-align: right; font-weight: 700;}
+
+.product-list .row > div > a {padding: 15px; background: #fff; box-shadow: 0 .15rem .3rem rgba(0, 0, 0, .1) !important; border-radius: 20px; display: block; margin-bottom: 30px; min-height: 260px; text-align: center;}
+.product-list h3 {color: #121416 !important; font-size: 13px;}
+.product-list i {font-size: 22px; border-radius: 50%; color: #fff; padding: 8px;}
+.product-list .price {font-weight: 700; font-size: 13px; display: block; margin: 5px 0;}
+.product-list .unid {color: #6c757d !important; font-size: 10px; display: block;}
 
 @media screen and (max-width: 750px) {
     iframe {

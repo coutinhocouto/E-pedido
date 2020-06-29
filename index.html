@@ -17,9 +17,8 @@
 
 		<script src="js/owl.carousel.js"></script>
 		<script src="js/jquery.sticky.js"></script>
-		
 		<script src="js/jquery-cookie.js"></script>
-
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-js/1.3.0/sticky.min.js"></script>
 		<script src="custom.js"></script>
 		
 		<title>E-Pedido</title>
@@ -60,7 +59,23 @@
 							items:1
 						}
 					}
-				})
+				});
+				
+				var url = "https://dev.asasys.com.br/app/app.php?fn=getProduto&data={%22cnpj%22:%2200000000000000%22,%22hashKey%22:%22a750e0111e49e32be320a89db7be9fed%22,%20%22page%22:1}"; 
+				
+				console.log(url)
+				$.getJSON(url,function(result){
+					$.each(result, function(i, field){
+						
+						var preco = 'R$ ' + field.preco_padrao;
+						
+						$(".product-list > .row").append('<div class="col-6"><a href="produto.html?id=' + field.codigo +'"><img src="' + field.imagem + '" alt="" /><h3>' + field.descricao + '</h3><span class="price">' + preco + '</span><span class="unid">1 ' + field.unid_medida + '</span></div></a>');
+						
+						return i < 9;
+						
+					});
+				});
+					
 				
 			});
 		</script>
@@ -69,39 +84,43 @@
 	
 	<body onload="onDeviceReady()">
 		
-		<div id="app">
-
-			<header>
-				<div class="container">
-					<div class="row">
-						<div class="col-4"><i class='bx bx-menu-alt-left'></i></div>
-						<div class="col-4"></div>
-						<div class="col-4"></div>
-					</div>
-				</div>
-			</header>
+		<div id="app" class="the-page">
 
 			<div class="owl-carousel owl-theme">
-				<div class="item"><img src="img/slide1.webp" /></div>
-				<div class="item"><img src="img/slide2.webp" /></div>
-				<div class="item"><img src="img/slide3.webp" /></div>
-				<div class="item"><img src="img/slide4.webp" /></div>
+				<div class="item"><img src="img/slide1.webp" alt="" /></div>
+				<div class="item"><img src="img/slide2.webp" alt="" /></div>
+				<div class="item"><img src="img/slide3.webp" alt="" /></div>
+				<div class="item"><img src="img/slide4.webp" alt="" /></div>
 			</div>
+			
+			<div style="height: 30px"></div>
 
-			<div class="container the-page">
-				<div class="row">
-					<div class="col-12">
-						
-					</div>
+			<div class="container">
+				<div class="row title">
+					<div class="col-8"><h2>Categorias em destaque</h2></div>
+					<div class="col-4"><a href="#">ver todas</a></div>
 				</div>
 				<div class="row cat-menu">
-					
+					<div class="col-12">
+						<a href="#">Medicamentos</a>
+						<a href="#">Beleza e Higiene</a>
+						<a href="#">Saúde e bem estar</a>
+						<a href="#">Mamãe e bêbe</a>
+					</div>
 				</div>
 			</div>
-
-			<footer>
-
-			</footer>
+			<div style="height: 30px"></div>
+			<div class="container">
+				<div class="row title">
+					<div class="col-8"><h2>Promoções</h2></div>
+					<div class="col-4"><a href="#">ver todas</a></div>
+				</div>
+			</div>
+			
+			<div class="container product-list">
+				<img src="img/loader.gif" alt="" id="loader" />
+				<div class="row"></div>
+			</div>
 			
 		</div>
 
