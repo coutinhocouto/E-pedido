@@ -41,7 +41,7 @@ header .row > div:last-child {text-align: right;}
 .cat-menu a {box-shadow: 0 .15rem .3rem rgba(0, 0, 0, .1) !important; border-radius: 30px; color: #212529; background-color: #fff; border-color: #dae0e5; display: inline-block; padding: .815rem 1.5rem; font-size: 12px; text-transform: uppercase; font-weight: 700; margin: 10px 0; }
 
 #sticky-wrapper {z-index: 99;}
-header { background: #EEF2F5; padding-top: 10px;}
+header { background: #EEF2F5; padding-top: 10px; z-index: 99;}
 #main {transition: margin-left .5s;}
 
 /* --------- COLORS --------- */
