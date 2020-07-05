@@ -30,7 +30,7 @@ input:focus, textarea:focus, select:focus, button:focus {   outline: none;}
 img {max-width: 100%;}
 a {color: #FFB300;}
 
-footer {background: #fff;position: fixed;bottom: 0;width: 100%;	text-align: center; padding: 10px 0; box-shadow: 0 0 10px 0 #b1b1b1;}
+footer {background: #fff;position: fixed;bottom: 0;width: 100%;	text-align: center; padding: 10px 0; box-shadow: 0 0 10px 0 #b1b1b1; z-index: 99;}
 footer a {color: #BBBBBB; font-size: 25px;}
 footer a.big {display: block; border-radius: 50%; height: 60px; width: 60px; margin: -25px auto 0; color: #fff; padding: 10px;}
 
@@ -78,6 +78,10 @@ line-height: 1.5;
 .product-list i {font-size: 22px; border-radius: 50%; color: #fff; padding: 8px;}
 .product-list .price {font-weight: 700; font-size: 13px; display: block; margin: 5px 0;}
 .product-list .unid {color: #6c757d !important; font-size: 10px; display: block;}
+
+.cat-list ul {padding: 0; width: 100%; border-top: 1px solid #ccccb3;}
+.cat-list a {padding: 10px; background: #fff; color: #000; display: block; border-bottom: 1px solid #ccccb3;}
+.cat-list a i {float: right;font-size: 25px;}
 
 @media screen and (max-width: 750px) {
     iframe {
