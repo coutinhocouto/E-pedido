@@ -29,28 +29,17 @@
 				document.addEventListener("deviceready", onDeviceReady, false);
 			}
 
-			gaU('send','pageview',{'title':'Categorias','page':'/produtos/id=?' + getParameterByName('id')});
+			function onDeviceReady(){
+				window.plugins.OneSignal.getIds(function(ids) {
+					var player = ids.userId;
+					Cookies.set('player', player, { expires: 365 });
+				});
+			}
+
+			gaU('send','pageview',{'title':'Index','page':'/'});
 
 			$(document).ready(function(){
 				"use strict";
-
-				var url = 'https://dev.asasys.com.br/app/app.php?fn=getProduto&data={"cnpj":"00000000000000","hashKey":"a750e0111e49e32be320a89db7be9fed", "page":1,  "filtro":{"codigo":"'  + getParameterByName('id') + '"}}'; 
-				
-				console.log(url)
-				$.getJSON(url,function(result){
-					$.each(result, function(i, field){
-						
-						$(".produto .row").append('<div style=" background: url(' + field.imagem + ') center center; background-size: cover; height: 250px; width: 100%; display: block;"></div>');
-						
-						$(".produto .row").append('<div class="col-12"><div><h3 class="prod-title">' + field.descricao + '</h3><h4 class="prod-price">R$ ' + field.preco_padrao + '</h4><div class="buy"></div></div></div>');
-						
-						$(".buy").append('<form class="cart" action="" method="post" enctype="multipart/form-data"><div class="quantity"><button type="button" class="minus" >-</button><input type="number" id="quantity" class="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qtd" size="4" placeholder="" inputmode="numeric"><button type="button" class="plus" >+</button></div><button type="submit" name="add-to-cart" value="260" class="single_add_to_cart_button button alt"><i class="bx bxs-cart-add"></i> Comprar</button></form>');
-						
-						$(".produto .row").append('<div class="col-12 desc"><h3>Descrição</h3></div>');
-						
-					});
-				});
-					
 				
 			});
 		</script>
@@ -60,11 +49,13 @@
 	<body onload="onDeviceReady()">
 		
 		<div id="app" class="the-page">
-			
-			<div class="container produto">
-				<img src="img/loader.gif" alt="" id="loader" />
+
+			<div class="container">
 				<div class="row">
-					
+					<div class="col-12">
+						<div class="title"><h2>Carrinho</h2></div>
+						<p>Seu carrinho está vazio</p>
+					</div>
 				</div>
 			</div>
 			

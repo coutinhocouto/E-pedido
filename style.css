@@ -29,6 +29,7 @@ body {min-height: 100vh; padding-bottom: 100px;}
 input:focus, textarea:focus, select:focus, button:focus {   outline: none;}
 img {max-width: 100%;}
 a {color: #FFB300;}
+.center {text-align: center;}
 
 footer {background: #fff;position: fixed;bottom: 0;width: 100%;	text-align: center; padding: 10px 0; box-shadow: 0 0 10px 0 #b1b1b1; z-index: 99;}
 footer a {color: #BBBBBB; font-size: 25px;}
@@ -37,6 +38,7 @@ footer a.big {display: block; border-radius: 50%; height: 60px; width: 60px; mar
 header i {font-size: 30px; vertical-align: middle; margin-top: 12px; color: #343A40;}
 header a {color: #343A40;}
 header .row > div:last-child {text-align: right;}
+#barcode {font-size: 45px; margin: 17px 0 0 -15px; color: #343A40;}
 
 .cat-menu a {box-shadow: 0 .15rem .3rem rgba(0, 0, 0, .1) !important; border-radius: 30px; color: #212529; background-color: #fff; border-color: #dae0e5; display: inline-block; padding: .815rem 1.5rem; font-size: 12px; text-transform: uppercase; font-weight: 700; margin: 10px 0; }
 
@@ -46,8 +48,9 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 
 /* --------- COLORS --------- */
 
-.product-list i, footer a.big, .sidenav {background: #FFB300;}
-.product-list .price, footer a:hover {color: #FFB300;}
+.product-list i, footer a.big, .sidenav, .single_add_to_cart_button, .btn {background: #FFB300;}
+.product-list .price, footer a:hover, .prod-title, .minus, .plus {color: #FFB300;}
+.minus, .plus {border: 1px solid #FFB300;}
 
 /* -------------------------- */
 
@@ -63,11 +66,7 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 .sidenav .side-menu { padding-bottom: 100px;}
 .sidenav .side-menu a {font-size: 20px;}
 
-.search-top {border-radius: 30px; background: url('img/search.png') no-repeat center right #fff; border-color: #ffffff; font-size: 18px; margin: 1rem 0 !important; height: calc(1.5em + 1rem + 2px);
-padding: .5rem 1rem; border: none; color: #495057; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; display: block;
-width: 100%;
-line-height: 1.5;
-}
+.search-top {border-radius: 30px; background: url('img/search.png') no-repeat center right #fff; border-color: #ffffff; font-size: 18px; margin: 1rem 0 !important; height: calc(1.5em + 1rem + 2px); padding: .5rem 1rem; border: none; color: #495057; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; display: block; width: 100%; line-height: 1.5; }
 
 .title {margin: 15px 0;}
 .title h2 {font-size: 15px; font-weight: 700;}
@@ -82,6 +81,19 @@ line-height: 1.5;
 .cat-list ul {padding: 0; width: 100%; border-top: 1px solid #ccccb3;}
 .cat-list a {padding: 10px; background: #fff; color: #000; display: block; border-bottom: 1px solid #ccccb3;}
 .cat-list a i {float: right;font-size: 25px;}
+
+.produto .col-12 > div {background: #fff; padding: 20px; margin-top: -45px; border-radius: 20px; text-align: center;}
+.minus, .plus {font-size: 14px; padding: 0.25rem 1rem;     padding-right: 1rem;     padding-left: 1rem;font-weight: 500; line-height: 20px; background: #fff;}
+.minus {border-radius: 50px 0px 0 50px;}
+.plus {border-radius: 0 50px 50px 0;}
+#quantity {border: 1px solid #e3e3e3; vertical-align: middle; padding: 2px; text-align: center;}
+.prod-price { font-size: 20px;  font-weight: 700;  margin: 10px 0 15px; color: #343A40;}
+.single_add_to_cart_button {font-size: 14px; padding: 0.4rem 1.4rem; font-weight: 500; line-height: 20px; color: #ffffff; border-radius: 20px; margin-top: 20px; border: none;}
+.single_add_to_cart_button i {font-size: 30px; vertical-align: middle;}
+.produto .desc h3 {border-bottom: 1px dashed #343A40; color: #343A40; margin: 20px 0; padding-bottom: 15px;}
+
+.form-control {margin-bottom: 10px;}
+.btn {width: 100%;}
 
 @media screen and (max-width: 750px) {
     iframe {
