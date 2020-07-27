@@ -1,6 +1,3 @@
-function init(){
-	document.addEventListener("deviceready", onDeviceReady, false);
-}
 
 $(document).ready(function(){
 
@@ -41,27 +38,6 @@ $(document).ready(function(){
 	   }
 	}
 	
-	function onDeviceReady(){
-		window.plugins.OneSignal.getIds(function(ids) {
-			var player = ids.userId;
-			Cookies.set('player', player, { expires: 365 });
-			alert(player);
-		});
-		$('#scan').click( function() {
-          cordova.plugins.barcodeScanner.scan(
-          function (result) {
-              alert("We got a barcode\n" +
-                    "Result: " + result.text + "\n" +
-                    "Format: " + result.format + "\n" +
-                    "Cancelled: " + result.cancelled);            
-          }, 
-          function (error) {
-              alert("Scanning failed: " + error);
-          });
-        }
-     );
-	}
-
 });
 
 $(document).on('click tap touchstart', '#logout', function() {"use strict"; Cookies.remove('nome'); Cookies.remove('cpf'); Cookies.remove('email');	Cookies.remove('id');window.location.replace("index.html");});
@@ -145,31 +121,3 @@ function goToByScroll(id) {
         scrollTop: $("#" + id).offset().top
     }, 'slow');
 }
-
-jQuery.validator.addMethod("cpf", function(value, element) {
-   value = jQuery.trim(value);
-
-    value = value.replace('.','');
-    value = value.replace('.','');
-    cpf = value.replace('-','');
-    while(cpf.length < 11) cpf = "0"+ cpf;
-    var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
-    var a = [];
-    var b = new Number;
-    var c = 11;
-    for (i=0; i<11; i++){
-        a[i] = cpf.charAt(i);
-        if (i < 9) b += (a[i] * --c);
-    }
-    if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11-x }
-    b = 0;
-    c = 11;
-    for (y=0; y<10; y++) b += (a[y] * c--);
-    if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11-x; }
-
-    var retorno = true;
-    if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
-
-    return this.optional(element) || retorno;
-
-}, "Informe um CPF válido");
