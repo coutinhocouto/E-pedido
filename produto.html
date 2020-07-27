@@ -36,20 +36,16 @@
 				$.getJSON(url,function(result){
 					$.each(result, function(i, field){
 						
-						$(".produto .row").append('<div style=" background: url(' + field.imagem + ') center center; background-size: cover; height: 250px; width: 100%; display: block;"></div>');
+						$(".produto .row #imagem").html('<div style=" background: url(' + field.imagem + ') center center; background-size: cover; height: 250px; width: 100%; display: block;"></div>');
 						
-						$(".produto .row").append('<div class="col-12"><div><h3 class="prod-title">' + field.descricao + '</h3><h4 class="prod-price">R$ ' + field.preco_padrao + '</h4><div class="buy"></div></div></div>');
+						$(".produto .row #info").html('<div class="col-12"><div><h3 class="prod-title">' + field.descricao + '</h3><h4 class="prod-price">R$ ' + field.preco_padrao + '</h4><div class="buy"></div></div></div>');
 						
-						$(".buy").append('<form class="cart" action="" method="post" enctype="multipart/form-data"><div class="quantity"><input type="button" value="-" class="qtyminus" field="quantity" /><input type="text" name="quantity" value="0" class="qty" /><input type="button" value="+" class="qtyplus" field="quantity" /></div><button type="submit" name="add-to-cart" value="260" class="single_add_to_cart_button button alt"><i class="bx bxs-cart-add"></i> Comprar</button></form>');
+						$(".buy").html('<form class="cart" action="" method="post" enctype="multipart/form-data"><div class="quantity"><input type="button" value="-" class="qtyminus" field="quantity" /><input type="text" name="quantity" value="0" class="qty" /><input type="button" value="+" class="qtyplus" field="quantity" /></div><button type="submit" name="add-to-cart" value="260" class="single_add_to_cart_button button alt"><i class="bx bxs-cart-add"></i> Comprar</button></form>');
 						
-						$(".produto .row").append('<div class="col-12 desc"><h3>Descrição</h3></div>');
+						$(".produto .row #desc").html('<div class="col-12 desc"><h3>Descrição</h3></div>');
 						
 					});
 				});
-				
-				var carrinho = Cookies.set('carrinho');
-				carrinho.push("Kiwi"); 
-				console.log('oi' + carrinho);
 				
 			});
 		</script>
@@ -63,7 +59,9 @@
 			<div class="container produto">
 				<img src="img/loader.gif" alt="" id="loader" />
 				<div class="row">
-					
+					<div id="imagem"></div>
+					<div id="info"></div>
+					<div id="desc"></div>
 				</div>
 			</div>
 			

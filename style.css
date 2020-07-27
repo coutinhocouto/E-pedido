@@ -91,6 +91,7 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 .single_add_to_cart_button {font-size: 14px; padding: 0.4rem 1.4rem; font-weight: 500; line-height: 20px; color: #ffffff; border-radius: 20px; margin-top: 20px; border: none;}
 .single_add_to_cart_button i {font-size: 30px; vertical-align: middle;}
 .produto .desc h3 {border-bottom: 1px dashed #343A40; color: #343A40; margin: 20px 0; padding-bottom: 15px;}
+.produto .row > div {width: 100%;}
 
 .form-control {margin-bottom: 10px;}
 .btn {width: 100%;}
