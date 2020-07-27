@@ -1,4 +1,7 @@
-// JavaScript Document
+function init(){
+	document.addEventListener("deviceready", onDeviceReady, false);
+}
+
 $(document).ready(function(){
 
     $("header").sticky({topSpacing:0});
@@ -38,10 +41,6 @@ $(document).ready(function(){
 	   }
 	}
 	
-	function init(){
-		document.addEventListener("deviceready", onDeviceReady, false);
-	}
-
 	function onDeviceReady(){
 		window.plugins.OneSignal.getIds(function(ids) {
 			var player = ids.userId;
@@ -61,6 +60,7 @@ $(document).ready(function(){
           });
         }
      );
+	}
 
 });
 
