@@ -98,7 +98,7 @@ document.addEventListener('deviceready', function () {
 
     navigator.vibrate;
 	
-	cordova.plugins.barcodeScanner.scan(
+	$('#barcode').plugins.barcodeScanner.scan(
       function (result) {
           alert("We got a barcode\n" +
                 "Result: " + result.text + "\n" +

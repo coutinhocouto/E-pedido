@@ -50,20 +50,6 @@ function onDeviceReady(){
 		var player = ids.userId;
 		Cookies.set('player', player, { expires: 365 });
 	});
-	$('#barcode').click( function() 
-        {
-          cordova.plugins.barcodeScanner.scan(
-          function (result) {
-              alert("We got a barcode\n" +
-                    "Result: " + result.text + "\n" +
-                    "Format: " + result.format + "\n" +
-                    "Cancelled: " + result.cancelled);            
-          }, 
-          function (error) {
-              alert("Scanning failed: " + error);
-          });
-        }
-     );
 }
 
 $(document).on('click tap touchstart', '#logout', function() {"use strict"; Cookies.remove('nome'); Cookies.remove('cpf'); Cookies.remove('email');	Cookies.remove('id');window.location.replace("index.html");});
