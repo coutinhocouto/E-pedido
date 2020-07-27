@@ -34,19 +34,6 @@
 					Cookies.set('player', player, { expires: 365 });
 					alert(player);
 				});
-				
-				$('#scan').click( function() {
-				  cordova.plugins.barcodeScanner.scan(
-				  function (result) {
-					  alert("We got a barcode\n" +
-							"Result: " + result.text + "\n" +
-							"Format: " + result.format + "\n" +
-							"Cancelled: " + result.cancelled);            
-				  }, 
-				  function (error) {
-					  alert("Scanning failed: " + error);
-				  });
-				}
 			 );
 			}
 			gaU('send','pageview',{'title':'Index','page':'/'});
@@ -91,6 +78,29 @@
 					
 				
 			});
+			
+			
+			
+			$(document).ready(function() {
+				document.addEventListener("deviceready", onDeviceReady2, false);
+			});
+
+			function onDeviceReady2() {      
+				 $('#barcode').click( function() 
+					{
+					  cordova.plugins.barcodeScanner.scan(
+					  function (result) {
+						  alert("We got a barcode\n" +
+								"Result: " + result.text + "\n" +
+								"Format: " + result.format + "\n" +
+								"Cancelled: " + result.cancelled);            
+					  }, 
+					  function (error) {
+						  alert("Scanning failed: " + error);
+					  });
+					}
+				 );
+			}
 		</script>
 
 	</head>
