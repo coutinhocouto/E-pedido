@@ -38,29 +38,6 @@ $(document).ready(function(){
 	   }
 	}
 	
-	var scanApp = {   
-		// Application Constructor
-		initialize: function () {
-			this.bindEvents();
-		},    bindEvents: function () {
-			document.addEventListener('deviceready', this.onDeviceReady);
-		},    onDeviceReady: function () {
-			console.log('Received Device Ready Event');
-			Log.initialize(app.displayLogLine);
-		},
-		scan: function () {
-			cordova.plugins.barcodeScanner.scan(
-					function (result) {
-						$(location).attr('href', 'pesquisar.html?codigo=' + result.text)
-						//alert("Barcode/QR code data\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
-					},
-					function (error) {
-						alert("Erro no scaneamento: " + error);
-					}
-			);
-		},
-	};
-	
 });
 
 $(document).on('click tap touchstart', '#logout', function() {"use strict"; Cookies.remove('nome'); Cookies.remove('cpf'); Cookies.remove('email');	Cookies.remove('id');window.location.replace("index.html");});
@@ -170,3 +147,26 @@ function onDeviceReady(){
 	}
  );
 }
+
+var scanApp = {   
+	// Application Constructor
+	initialize: function () {
+		this.bindEvents();
+	},    bindEvents: function () {
+		document.addEventListener('deviceready', this.onDeviceReady);
+	},    onDeviceReady: function () {
+		console.log('Received Device Ready Event');
+		Log.initialize(app.displayLogLine);
+	},
+	scan: function () {
+		cordova.plugins.barcodeScanner.scan(
+				function (result) {
+					window.location.href = 'pesquisar.html?codigo=' + result.text; 
+					//alert("Barcode/QR code data\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
+				},
+				function (error) {
+					alert("Erro no scaneamento: " + error);
+				}
+		);
+	},
+};
