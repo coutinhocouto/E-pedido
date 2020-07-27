@@ -82,7 +82,7 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 .cat-list a {padding: 10px; background: #fff; color: #000; display: block; border-bottom: 1px solid #ccccb3;}
 .cat-list a i {float: right;font-size: 25px;}
 
-.produto .col-12 > div {background: #fff; padding: 20px; margin-top: -45px; border-radius: 20px; text-align: center;}
+.produto .col-12 > div {background: #fff; padding: 20px; margin-top: -45px; border-radius: 20px; text-align: center; border: 5px solid #EEF2F5;}
 .minus, .plus {font-size: 14px; padding: 0.25rem 1rem;     padding-right: 1rem;     padding-left: 1rem;font-weight: 500; line-height: 20px; background: #fff;}
 .minus {border-radius: 50px 0px 0 50px;}
 .plus {border-radius: 0 50px 50px 0;}
@@ -94,6 +94,8 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 
 .form-control {margin-bottom: 10px;}
 .btn {width: 100%;}
+
+label.error {color: #f00; font-size: 12px; margin-bottom: 15px; margin-top: -5px; display: block;}
 
 @media screen and (max-width: 750px) {
     iframe {

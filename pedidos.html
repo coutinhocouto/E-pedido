@@ -24,19 +24,7 @@
 		<title>E-Pedido</title>
 
 		<script>
-			
-			function init(){
-				document.addEventListener("deviceready", onDeviceReady, false);
-			}
-
-			function onDeviceReady(){
-				window.plugins.OneSignal.getIds(function(ids) {
-					var player = ids.userId;
-					Cookies.set('player', player, { expires: 365 });
-				});
-			}
-
-			gaU('send','pageview',{'title':'Index','page':'/'});
+			gaU('send','pageview',{'title':'Pedidos','page':'/pedidos'});
 
 			$(document).ready(function(){
 				"use strict";

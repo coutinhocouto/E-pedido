@@ -19,27 +19,81 @@
 		<script src="js/jquery.sticky.js"></script>
 		<script src="js/jquery-cookie.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-js/1.3.0/sticky.min.js"></script>
+		
+		<script type="text/javascript" src="js/md5.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/additional-methods.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/localization/messages_pt_BR.min.js"></script>
+		
 		<script src="custom.js"></script>
 		
 		<title>E-Pedido</title>
 
 		<script>
 			
-			function init(){
-				document.addEventListener("deviceready", onDeviceReady, false);
-			}
-
-			function onDeviceReady(){
-				window.plugins.OneSignal.getIds(function(ids) {
-					var player = ids.userId;
-					Cookies.set('player', player, { expires: 365 });
-				});
-			}
-
-			gaU('send','pageview',{'title':'Index','page':'/'});
-
+			gaU('send','pageview',{'title':'Criar conta','page':'/criar-conta'});
+			
 			$(document).ready(function(){
 				"use strict";
+				
+				$('#cpf').mask('000000000000');
+				$('#telefone').mask('(00) 0000-00000');
+				
+				jQuery.extend(jQuery.validator.messages, {
+					equalTo: "As senhas devem ser iguais.",
+					minlength: "O telefone está incompleto.",
+				});
+				
+				$('#validate').validate({
+				  rules: {
+					  nome: {	required: true},
+					  email: {	required: true},
+					  cpf: {	cpf: true, required: true},
+					  telefone: {	required: true, minlength: 15},
+					  pass: {	required: true},
+					  cpass: {  equalTo: "#pass"}
+				  }
+				});
+				$("#validate").submit(function(e){
+					e.preventDefault();
+				});
+				
+				
+				$("#criar-conta").click(function(){
+					var nome = $("#doenca-hid").val();
+					email = $("#grau-hid").val();
+					telefone = $("#conduta-hid").val();
+					cpf = $("#nome").val();
+					pass = $.md5($("#pass").val(), 'asasys');
+					
+					console.log(pass);
+					
+					var dataString='fn=setCliente&data={"cnpj":"00000000000000", "hashKey":"a750e0111e49e32be320a89db7be9fed", "acao":"I", "id": "", "pass":' + pass + ', "uid":' + Cookies.get('player') + ', "cpf": ' + cpf + ',  "nome":' + nome + ', "telefone":' + telefone + ', "endereco":"" }';
+
+					console.log(dataString);
+
+					$.ajax({
+						type:"POST",							
+						url:"https://dev.asasys.com.br/app/app.php",
+						data: dataString,
+						crossDomain: true,
+						cache: false,
+						error: function(){
+							console.log('erro');
+							$('#response').html('<div style="background: #c22121; padding: 10px; border-radius: 5px;">Sua consulta não foi salva, por favor verifique sua internet!</div>');
+						},
+						success: function() {
+							console.log('funcionou');
+						}
+					});
+
+				});
+				$('#criar-conta').click(function(){
+					
+					
+					
+				});
 				
 			});
 		</script>
@@ -54,13 +108,15 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="title"><h2>Criar conta</h2></div>
-						<input type="text" placeholder="seu nome" class="form-control" />
-						<input type="text" placeholder="seu email" class="form-control" />
-						<input type="text" placeholder="seu cpf" class="form-control" />
-						<input type="text" placeholder="seu telefone" class="form-control" />
-						<input type="password" placeholder="sua senha" class="form-control" />
-						<input type="password" placeholder="repetir senha" class="form-control" />
-						<input type="submit" value="criar conta" class="btn" />
+						<form action="" method="post" id="validate">
+							<input type="text" placeholder="Nome *" id="nome" name="nome" class="form-control" />
+							<input type="email" placeholder="Email *" id="email" name="email" class="form-control" />
+							<input type="text" placeholder="CPF *" id="cpf" name="cpf" class="form-control" />
+							<input type="text" placeholder="Telefone *" id="telefone" name="telefone" class="form-control" />
+							<input type="password" placeholder="Senha" id="pass" name="pass" class="form-control" />
+							<input type="password" placeholder="Repetir Senha" id="cpass" name="cpass" class="form-control" />
+							<input type="submit" value="criar conta" class="btn" id="criar-conta" />
+						</form>
 						<br>
 						<br>
 
