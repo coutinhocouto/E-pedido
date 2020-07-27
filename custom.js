@@ -1,5 +1,12 @@
+var cnpj = "03565982000157";
+var hash = "290bff27b5bd64b51f9d0b2333a4cefe";
 
 $(document).ready(function(){
+	
+	if(typeof Cookies.get('nome') == 'undefined' ) {
+		var carrinho = []
+		Cookies.set('carrinho', carrinho, { expires: 1 });	
+	}
 
     $("header").sticky({topSpacing:0});
 	
@@ -14,29 +21,28 @@ $(document).ready(function(){
 	
 	$("header").sticky({topSpacing:0});
 	
-	var qty = $( this ).closest( 'form.cart' ).find( '.qty' );
-	var val   = parseFloat(qty.val());
-	var max = parseFloat(qty.attr( 'max' ));
-	var min = parseFloat(qty.attr( 'min' ));
-	var step = parseFloat(qty.attr( 'step' ));
-
-	// Change the value if plus or minus
-	if ( $( this ).is( '.plus' ) ) {
-	   if ( max && ( max <= val ) ) {
-		  qty.val( max );
-	   } 
-	else {
-	   qty.val( val + step );
-		 }
-	} 
-	else {
-	   if ( min && ( min >= val ) ) {
-		  qty.val( min );
-	   } 
-	   else if ( val > 1 ) {
-		  qty.val( val - step );
-	   }
-	}
+	var scanApp = {   
+		// Application Constructor
+		initialize: function () {
+			this.bindEvents();
+		},    bindEvents: function () {
+			document.addEventListener('deviceready', this.onDeviceReady);
+		},    onDeviceReady: function () {
+			console.log('Received Device Ready Event');
+			Log.initialize(app.displayLogLine);
+		},
+		scan: function () {
+			cordova.plugins.barcodeScanner.scan(
+					function (result) {
+						window.location.href = 'produto.html?codigo=' + result.text; 
+						//alert("Barcode/QR code data\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
+					},
+					function (error) {
+						alert("Erro no scaneamento: " + error);
+					}
+			);
+		},
+	};
 	
 });
 
@@ -132,41 +138,38 @@ function onDeviceReady(){
 		Cookies.set('player', player, { expires: 365 });
 		alert(player);
 	});
-
-	$('#scan').click( function() {
-	  cordova.plugins.barcodeScanner.scan(
-	  function (result) {
-		  alert("We got a barcode\n" +
-				"Result: " + result.text + "\n" +
-				"Format: " + result.format + "\n" +
-				"Cancelled: " + result.cancelled);            
-	  }, 
-	  function (error) {
-		  alert("Scanning failed: " + error);
-	  });
-	}
- );
 }
 
-var scanApp = {   
-	// Application Constructor
-	initialize: function () {
-		this.bindEvents();
-	},    bindEvents: function () {
-		document.addEventListener('deviceready', this.onDeviceReady);
-	},    onDeviceReady: function () {
-		console.log('Received Device Ready Event');
-		Log.initialize(app.displayLogLine);
-	},
-	scan: function () {
-		cordova.plugins.barcodeScanner.scan(
-				function (result) {
-					window.location.href = 'pesquisar.html?codigo=' + result.text; 
-					//alert("Barcode/QR code data\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
-				},
-				function (error) {
-					alert("Erro no scaneamento: " + error);
-				}
-		);
-	},
-};
+$(document).on('click', '.qtyplus', function(e) {
+	// Stop acting like a button
+	e.preventDefault();
+	// Get the field name
+	fieldName = $(this).attr('field');
+	// Get its current value
+	var currentVal = parseInt($('input[name='+fieldName+']').val());
+	// If is not undefined
+	if (!isNaN(currentVal)) {
+		// Increment
+		$('input[name='+fieldName+']').val(currentVal + 1);
+	} else {
+		// Otherwise put a 0 there
+		$('input[name='+fieldName+']').val(0);
+	}
+});
+
+$(document).on('click', '.qtyminus', function(e) {
+	 // Stop acting like a button
+	e.preventDefault();
+	// Get the field name
+	fieldName = $(this).attr('field');
+	// Get its current value
+	var currentVal = parseInt($('input[name='+fieldName+']').val());
+	// If it isn't undefined or its greater than 0
+	if (!isNaN(currentVal) && currentVal > 0) {
+		// Decrement one
+		$('input[name='+fieldName+']').val(currentVal - 1);
+	} else {
+		// Otherwise put a 0 there
+		$('input[name='+fieldName+']').val(0);
+	}
+});

@@ -30,7 +30,7 @@
 			$(document).ready(function(){
 				"use strict";
 
-				var url = "https://dev.asasys.com.br/app/app.php?fn=getFamilia&data={%22cnpj%22:%2200000000000000%22,%22hashKey%22:%22a750e0111e49e32be320a89db7be9fed%22,%22page%22:1}"; 
+				var url = 'https://dev.asasys.com.br/app/app.php?fn=getFamilia&data={"cnpj":"' + cnpj + '","hashKey":"' + hash + '", "page":1}'; 
 				
 				console.log(url)
 				$.getJSON(url,function(result){

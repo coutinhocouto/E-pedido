@@ -40,7 +40,11 @@
 
 			$(document).ready(function(){
 				"use strict";
-					
+				
+				if(getParameterByName('codigo')){
+					$('.search-top').val(getParameterByName('codigo'));
+				}
+				
 				
 			});
 		</script>

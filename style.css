@@ -50,7 +50,7 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 
 .product-list i, footer a.big, .sidenav, .single_add_to_cart_button, .btn {background: #FFB300;}
 .product-list .price, footer a:hover, .prod-title, .minus, .plus {color: #FFB300;}
-.minus, .plus {border: 1px solid #FFB300;}
+.qtyminus, .qtyplus {border: 1px solid #FFB300;}
 
 /* -------------------------- */
 
@@ -83,10 +83,10 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 .cat-list a i {float: right;font-size: 25px;}
 
 .produto .col-12 > div {background: #fff; padding: 20px; margin-top: -45px; border-radius: 20px; text-align: center; border: 5px solid #EEF2F5;}
-.minus, .plus {font-size: 14px; padding: 0.25rem 1rem;     padding-right: 1rem;     padding-left: 1rem;font-weight: 500; line-height: 20px; background: #fff;}
-.minus {border-radius: 50px 0px 0 50px;}
-.plus {border-radius: 0 50px 50px 0;}
-#quantity {border: 1px solid #e3e3e3; vertical-align: middle; padding: 2px; text-align: center;}
+.qtyminus, .qtyplus {font-size: 14px; padding: 0.25rem 1rem;     padding-right: 1rem;     padding-left: 1rem;font-weight: 500; line-height: 20px; background: #fff;}
+.qtyminus {border-radius: 50px 0px 0 50px;}
+.qtyplus {border-radius: 0 50px 50px 0;}
+.qty {border: 1px solid #e3e3e3; vertical-align: middle; padding: 2px; text-align: center; max-width: 70px;}
 .prod-price { font-size: 20px;  font-weight: 700;  margin: 10px 0 15px; color: #343A40;}
 .single_add_to_cart_button {font-size: 14px; padding: 0.4rem 1.4rem; font-weight: 500; line-height: 20px; color: #ffffff; border-radius: 20px; margin-top: 20px; border: none;}
 .single_add_to_cart_button i {font-size: 30px; vertical-align: middle;}
