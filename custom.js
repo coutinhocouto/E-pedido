@@ -113,7 +113,7 @@ function onDeviceReady(){
 	window.plugins.OneSignal.getIds(function(ids) {
 		var player = ids.userId;
 		Cookies.set('player', player, { expires: 365 });
-		alert(player);
+		//alert(player);
 	});
 }
 
