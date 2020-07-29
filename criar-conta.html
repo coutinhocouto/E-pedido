@@ -34,44 +34,44 @@
 			
 			gaU('send','pageview',{'title':'Criar conta','page':'/criar-conta'});
 			
+			jQuery.validator.addMethod("cpf", function(value, element) {
+			   value = jQuery.trim(value);
+
+				value = value.replace('.','');
+				value = value.replace('.','');
+				cpf = value.replace('-','');
+				while(cpf.length < 11) cpf = "0"+ cpf;
+				var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
+				var a = [];
+				var b = new Number;
+				var c = 11;
+				for (i=0; i<11; i++){
+					a[i] = cpf.charAt(i);
+					if (i < 9) b += (a[i] * --c);
+				}
+				if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11-x }
+				b = 0;
+				c = 11;
+				for (y=0; y<10; y++) b += (a[y] * c--);
+				if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11-x; }
+
+				var retorno = true;
+				if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
+
+				return this.optional(element) || retorno;
+
+			}, "Informe um CPF válido");
+			
 			$(document).ready(function(){
 				"use strict";
 				
-				$('#cpf').mask('000000000000');
+				$('#cpf').mask('00000000000');
 				$('#telefone').mask('(00) 0000-00000');
 				
 				jQuery.extend(jQuery.validator.messages, {
 					equalTo: "As senhas devem ser iguais.",
 					minlength: "O telefone está incompleto.",
 				});
-				
-				jQuery.validator.addMethod("cpf", function(value, element) {
-				   value = jQuery.trim(value);
-
-					value = value.replace('.','');
-					value = value.replace('.','');
-					cpf = value.replace('-','');
-					while(cpf.length < 11) cpf = "0"+ cpf;
-					var expReg = /^0+$|^1+$|^2+$|^3+$|^4+$|^5+$|^6+$|^7+$|^8+$|^9+$/;
-					var a = [];
-					var b = new Number;
-					var c = 11;
-					for (i=0; i<11; i++){
-						a[i] = cpf.charAt(i);
-						if (i < 9) b += (a[i] * --c);
-					}
-					if ((x = b % 11) < 2) { a[9] = 0 } else { a[9] = 11-x }
-					b = 0;
-					c = 11;
-					for (y=0; y<10; y++) b += (a[y] * c--);
-					if ((x = b % 11) < 2) { a[10] = 0; } else { a[10] = 11-x; }
-
-					var retorno = true;
-					if ((cpf.charAt(9) != a[9]) || (cpf.charAt(10) != a[10]) || cpf.match(expReg)) retorno = false;
-
-					return this.optional(element) || retorno;
-
-				}, "Informe um CPF válido");
 				
 				$('#validate').validate({
 				  rules: {
@@ -89,15 +89,15 @@
 				
 				
 				$("#criar-conta").click(function(){
-					var nome = $("#doenca-hid").val();
-					email = $("#grau-hid").val();
-					telefone = $("#conduta-hid").val();
-					cpf = $("#nome").val();
+					var nome = $("#nome").val();
+					email = $("#email").val();
+					telefone = $("#telefone").val();
+					cpf = $("#cpf").val();
 					pass = $.md5($("#pass").val(), 'asasys');
 					
 					console.log(pass);
 					
-					var dataString='fn=setCliente&data={"cnpj":"' + cnpj + '", "hashKey":"' + hash + '", "acao":"I", "id": "", "pass":' + pass + ', "uid":' + Cookies.get('player') + ', "cpf": ' + cpf + ',  "nome":' + nome + ', "telefone":' + telefone + ', "endereco":"" }';
+					var dataString='fn=setCliente&data={"cnpj":"' + cnpj + '", "hashKey":"' + hash + '", "acao":"I", "id": "' + cpf + '", "pass":"' + pass + '", "uid":"' + Cookies.get('player') + '", "cpf": "' + cpf + '", "email": "' + email + '",  "nome":"' + nome + '", "telefone":"' + telefone + '"}';
 
 					console.log(dataString);
 
@@ -109,7 +109,7 @@
 						cache: false,
 						error: function(){
 							console.log('erro');
-							$('#response').html('<div style="background: #c22121; padding: 10px; border-radius: 5px;">Sua consulta não foi salva, por favor verifique sua internet!</div>');
+							$('#response').html('<div style="background: #c22121; padding: 10px; border-radius: 5px;">Erro! Verifique sua conexão com a internet.</div>');
 						},
 						success: function() {
 							console.log('funcionou');
@@ -136,6 +136,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="title"><h2>Criar conta</h2></div>
+						<div id="response"></div>
 						<form action="" method="post" id="validate">
 							<input type="text" placeholder="Nome *" id="nome" name="nome" class="form-control" />
 							<input type="email" placeholder="Email *" id="email" name="email" class="form-control" />

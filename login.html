@@ -19,6 +19,7 @@
 		<script src="js/jquery.sticky.js"></script>
 		<script src="js/jquery-cookie.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-js/1.3.0/sticky.min.js"></script>
+		<script type="text/javascript" src="js/md5.js"></script>
 		<script src="custom.js"></script>
 		
 		<title>E-Pedido</title>
@@ -28,7 +29,31 @@
 			gaU('send','pageview',{'title':'Login','page':'/login'});
 
 			$(document).ready(function(){
-				"use strict";
+				
+				$("#entrar").click(function(){
+					var email = $("#email").val(); 
+					pass = $.md5($("#pass").val(), 'asasys');
+					
+					var dataString='fn=getCliente&data={"cnpj":"' + cnpj + '", "hashKey":"' + hash + '", "pass":"' + pass + '", "email": "' + email + '"}';
+
+					console.log(dataString);
+
+					$.ajax({
+						type:"POST",							
+						url:"https://dev.asasys.com.br/app/app.php",
+						data: dataString,
+						crossDomain: true,
+						cache: false,
+						error: function(){
+							console.log('erro');
+							$('#response').html('<div style="background: #c22121; padding: 10px; border-radius: 5px;">Erro! Verifique sua conexão com a internet.</div>');
+						},
+						success: function() {
+							console.log('funcionou');
+						}
+					});
+
+				});
 				
 			});
 		</script>
@@ -39,11 +64,23 @@
 		
 		<div id="app" class="the-page">
 
-			<div class="content">
-				<div class="col-12">
-				<input type="text" placeholder="seu email" />
-				<input type="password" placeholder="sua senha" />
-				<input type="submit" value="entrar" />
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="title"><h2>Faça seu login</h2></div>
+						<div id="response"></div>
+						<input type="text" placeholder="seu email" class="form-control" id="email" />
+						<input type="password" placeholder="sua senha" class="form-control" id="pass" />
+						<input type="submit" value="entrar" class="btn" id="entrar" />
+						<br>
+						<br>
+					</div>
+					<div class="col-6 center">
+						<a href="criar-conta.html">Cadastre-se</a>
+					</div>
+					<div class="col-6 center">
+						<a href="recuperar.html">Recuperar senha</a>
+					</div>
 				</div>
 			</div>
 			

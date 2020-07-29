@@ -1,18 +1,20 @@
 var cnpj = "03565982000157";
-var hash = "290bff27b5bd64b51f9d0b2333a4cefe";
+hash = "290bff27b5bd64b51f9d0b2333a4cefe";
 
 $(document).ready(function(){
 	
-	if(typeof Cookies.get('nome') == 'undefined' ) {
-		var carrinho = []
-		Cookies.set('carrinho', carrinho, { expires: 1 });	
-	}
+	if(typeof Cookies.get('carrinho') == 'undefined' ) {
+		var carrinho = [];
 
+		Cookies.set('carrinho', JSON.stringify(carrinho), { expires: 1 });
+		console.log(Cookies.get('carrinho'));
+	}
+	
     $("header").sticky({topSpacing:0});
 	
-	$('.the-page').prepend('<header><div class="container"><div class="row"><div class="col-3"><i onclick="openNav()" class="bx bx-menu-alt-left"></i></div><div class="col-6"><a href="index.html"><img src="img/logotipo.png" alt="" /></a></div><div class="col-3"><a href="minha-conta.html"><i class="bx bxs-user-circle"></i></a></div></div></div></header><div class="container"><div class="row"><div class="col-10"><form action="pesquisar.html" method="get"><input type="text" placeholder="Pesquisar" class="search-top" /></form></div><div class="col-2"><i class="bx bx-barcode" id="barcode" onclick="scanApp.scan()" ></i></div></div></div>');
+	$('.the-page').prepend('<header><div class="container"><div class="row"><div class="col-3"><i onclick="openNav()" class="bx bx-menu-alt-left"></i></div><div class="col-6"><a href="index.html"><img src="img/logotipo.png" alt="" /></a></div><div class="col-3"><a href="login.html"><i class="bx bxs-user-circle"></i></a></div></div></div></header><div class="container"><div class="row"><div class="col-10"><form action="pesquisar.html" method="get"><input type="text" placeholder="Pesquisar" class="search-top" /></form></div><div class="col-2"><i class="bx bx-barcode" id="barcode" onclick="scanApp.scan()" ></i></div></div></div>');
 	
-	$('.the-page').append('<div id="mySidenav" class="sidenav"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><div class="row"><div class="col-12 user-dsk"><img src="img/user-dummy-pic.png" alt="" />	<a href="minha-conta.html">Entrar | Cadastre-se</a>	</div>	<div class="col-12 side-menu"><h3>MENU</h3>	<a href="index.html"><i class="bx bx-home-alt" ></i> Home</a><a href="pedidos.html"><i class="bx bxs-package"></i> Meus Pedidos</a><a href="carrinho.html"><i class="bx bx-cart-alt" ></i> Carrinho</a>	<a href="categorias.html"><i class="bx bx-list-ul" ></i> Categorias</a><a href="promocoes.html"><i class="bx bxs-purchase-tag"></i> Promoções</a></div></div></div>');
+	$('.the-page').append('<div id="mySidenav" class="sidenav"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><div class="row"><div class="col-12 user-dsk"><img src="img/user-dummy-pic.png" alt="" />	<a href="login.html">Entrar | Cadastre-se</a>	</div>	<div class="col-12 side-menu"><h3>MENU</h3>	<a href="index.html"><i class="bx bx-home-alt" ></i> Home</a><a href="pedidos.html"><i class="bx bxs-package"></i> Meus Pedidos</a><a href="carrinho.html"><i class="bx bx-cart-alt" ></i> Carrinho</a>	<a href="categorias.html"><i class="bx bx-list-ul" ></i> Categorias</a><a href="promocoes.html"><i class="bx bxs-purchase-tag"></i> Promoções</a></div></div></div>');
 	
 	//<a href="favoritos.html"><i class="bx bx-heart" ></i> Favoritos</a>
 	//<a href="configuracoes.html"><i class="bx bx-cog" ></i> Configurações</a>

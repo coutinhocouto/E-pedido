@@ -30,6 +30,7 @@ input:focus, textarea:focus, select:focus, button:focus {   outline: none;}
 img {max-width: 100%;}
 a {color: #FFB300;}
 .center {text-align: center;}
+hr {width: 100%;}
 
 footer {background: #fff;position: fixed;bottom: 0;width: 100%;	text-align: center; padding: 10px 0; box-shadow: 0 0 10px 0 #b1b1b1; z-index: 99;}
 footer a {color: #BBBBBB; font-size: 25px;}
@@ -97,6 +98,10 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 .btn {width: 100%;}
 
 label.error {color: #f00; font-size: 12px; margin-bottom: 15px; margin-top: -5px; display: block;}
+
+.cart {background: #fff; padding: 10px;}
+.cart .nome-prod {display: flex; justify-content: center; align-items: center; height: 70px; font-size: 13px;}
+.cart .preco {text-align: center; display: block; font-size: 12px;}
 
 @media screen and (max-width: 750px) {
     iframe {

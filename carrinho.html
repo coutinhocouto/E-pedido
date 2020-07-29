@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" />
@@ -30,6 +30,26 @@
 			$(document).ready(function(){
 				"use strict";
 				
+				
+				if(Cookies.get('carrinho').length === 0){
+					
+					console.log('vazio')
+					
+				} else {
+					var url = Cookies.get('carrinho'); 
+
+					console.log(url)
+					$.getJSON(url,function(result){
+						$.each(result, function(i, field){
+
+							var preco = 'R$ ' + field.preco_padrao;
+
+							$(".product-list > .row").append('<div class="col-6"><a href="produto.html?id=' + field.codigo +'"><img src="' + field.imagem + '" alt="" /><h3>' + field.descricao + '</h3><span class="price">' + preco + '</span><span class="unid">1 ' + field.unid_medida + '</span></div></a>');
+
+						});
+					});
+				}
+				
 			});
 		</script>
 
@@ -43,8 +63,26 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="title"><h2>Carrinho</h2></div>
+					</div>
+				</div>
+				<div class="row cart">
+					<div class="col-12">
 						<p>Seu carrinho está vazio</p>
 					</div>
+				</div>
+				<div class="row cart">
+					<div class="col-5"><img src="https://dev.asasys.com.br/temp/ecommerce/sem-foto.jpg" alt="" /></div>
+					<div class="col-7">
+						<span class="nome-prod">ACAI 250ML COPO</span>
+					</div>
+					<hr>
+					<div class="col-4">
+						<input type="text" name="quantity" id="qty" value="1" class="qty" /><br>
+					</div>
+					<div class="col-6">
+						<span class="preco">R$ 6,00</span>
+					</div>
+					<div class="col-1"><i class="bx bx-trash"></i></div>
 				</div>
 			</div>
 			
