@@ -73,7 +73,7 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 .title h2 {font-size: 15px; font-weight: 700;}
 .title a {font-size: 12px; display: block; text-align: right; font-weight: 700;}
 
-.product-list .row > div > a {padding: 15px; background: #fff; box-shadow: 0 .15rem .3rem rgba(0, 0, 0, .1) !important; border-radius: 20px; display: block; margin-bottom: 30px; min-height: 260px; text-align: center;}
+.product-list .row > div > a {padding: 15px; background: #fff; box-shadow: 0 .15rem .3rem rgba(0, 0, 0, .1) !important; border-radius: 20px; display: block; margin-bottom: 30px; /*min-height: 260px;*/ text-align: center;}
 .product-list h3 {color: #121416 !important; font-size: 13px;}
 .product-list i {font-size: 22px; border-radius: 50%; color: #fff; padding: 8px;}
 .product-list .price {font-weight: 700; font-size: 13px; display: block; margin: 5px 0;}

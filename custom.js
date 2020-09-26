@@ -1,22 +1,3 @@
-var popper = document.createElement('script'); 
-popper.src =  "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"; 
-document.head.appendChild(popper);
-
-var boot = document.createElement('script'); 
-boot.src =  "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"; 
-document.head.appendChild(boot);
-
-var owl = document.createElement('script'); 
-owl.src =  "js/owl.carousel.js"; 
-document.head.appendChild(owl);
-
-var sticky = document.createElement('script'); 
-sticky.src =  "js/jquery.sticky.js"; 
-document.head.appendChild(sticky);
-
-var cnpj = "03565982000157";
-hash = "290bff27b5bd64b51f9d0b2333a4cefe";
-
 $(document).ready(function(){
 	
 	if(typeof Cookies.get('carrinho') == 'undefined' ) {
