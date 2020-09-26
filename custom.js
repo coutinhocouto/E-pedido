@@ -1,3 +1,19 @@
+var popper = document.createElement('script'); 
+popper.src =  "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"; 
+document.head.appendChild(popper);
+
+var boot = document.createElement('script'); 
+boot.src =  "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"; 
+document.head.appendChild(boot);
+
+var owl = document.createElement('script'); 
+owl.src =  "js/owl.carousel.js"; 
+document.head.appendChild(owl);
+
+var sticky = document.createElement('script'); 
+sticky.src =  "js/jquery.sticky.js"; 
+document.head.appendChild(sticky);
+
 var cnpj = "03565982000157";
 hash = "290bff27b5bd64b51f9d0b2333a4cefe";
 
@@ -14,7 +30,18 @@ $(document).ready(function(){
 	
 	$('.the-page').prepend('<header><div class="container"><div class="row"><div class="col-3"><i onclick="openNav()" class="bx bx-menu-alt-left"></i></div><div class="col-6"><a href="index.html"><img src="img/logotipo.png" alt="" /></a></div><div class="col-3"><a href="login.html"><i class="bx bxs-user-circle"></i></a></div></div></div></header><div class="container"><div class="row"><div class="col-10"><form action="pesquisar.html" method="get"><input type="text" placeholder="Pesquisar" class="search-top" /></form></div><div class="col-2"><i class="bx bx-barcode" id="barcode" onclick="scanApp.scan()" ></i></div></div></div>');
 	
-	$('.the-page').append('<div id="mySidenav" class="sidenav"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><div class="row"><div class="col-12 user-dsk"><img src="img/user-dummy-pic.png" alt="" />	<a href="login.html">Entrar | Cadastre-se</a>	</div>	<div class="col-12 side-menu"><h3>MENU</h3>	<a href="index.html"><i class="bx bx-home-alt" ></i> Home</a><a href="pedidos.html"><i class="bx bxs-package"></i> Meus Pedidos</a><a href="carrinho.html"><i class="bx bx-cart-alt" ></i> Carrinho</a>	<a href="categorias.html"><i class="bx bx-list-ul" ></i> Categorias</a><a href="promocoes.html"><i class="bx bxs-purchase-tag"></i> Promoções</a></div></div></div>');
+	var entrar = '';
+	pedidos = '';
+	
+	if(typeof Cookies.get('user') == 'undefined' ) {
+		entrar = '<a href="login.html">Entrar | Cadastre-se</a>';
+		pedidos = '<a href="login.html"><i class="bx bxs-package"></i> Meus Pedidos</a>';
+	} else {
+		entrar = '<a href="minha-conta.html">Minha Conta</a>';
+		pedidos = '<a href="pedidos.html"><i class="bx bxs-package"></i> Meus Pedidos</a>';
+	}
+	
+	$('.the-page').append('<div id="mySidenav" class="sidenav"><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><div class="row"><div class="col-12 user-dsk"><img src="img/user-dummy-pic.png" alt="" />' + entrar + '</div>	<div class="col-12 side-menu"><h3>MENU</h3>	<a href="index.html"><i class="bx bx-home-alt" ></i> Home</a>' + pedidos + '<a href="carrinho.html"><i class="bx bx-cart-alt" ></i> Carrinho</a>	<a href="categorias.html"><i class="bx bx-list-ul" ></i> Categorias</a><a href="promocoes.html"><i class="bx bxs-purchase-tag"></i> Promoções</a></div></div></div>');
 	
 	//<a href="favoritos.html"><i class="bx bx-heart" ></i> Favoritos</a>
 	//<a href="configuracoes.html"><i class="bx bx-cog" ></i> Configurações</a>
@@ -25,12 +52,20 @@ $(document).ready(function(){
 	
 });
 
-$(document).on('click tap touchstart', '#logout', function() {"use strict"; Cookies.remove('nome'); Cookies.remove('cpf'); Cookies.remove('email');	Cookies.remove('id');window.location.replace("index.html");});
+$(document).on('click tap touchstart', '#logout', function() {
+	Cookies.remove('user'); 
+	Cookies.remove('pass');
+	Cookies.remove('nome');
+	Cookies.remove('id');
+	window.location.replace("index.html");
+});
 
-$( document ).ajaxStart(function() {   "use strict";  $( "#loader" ).show(); $( "#loader" ).css('display', 'block'); $( "#loader" ).css('margin', '0 auto');});
-$( document ).ajaxStop(function() {	"use strict";  $( "#loader" ).hide(); 	
-	
-
+$( document ).ajaxStart(function() {   
+	$( "#loader" ).show(); 
+	$( "#loader" ).css('display', 'block'); 
+	$( "#loader" ).css('margin', '0 auto');});
+$( document ).ajaxStop(function() {	
+	$( "#loader" ).hide(); 	
 });
 
 function getParameterByName(name, url) {
@@ -139,8 +174,6 @@ $(document).on('click', '.qtyplus', function(e) {
 $(document).on('click', '.qtyminus', function(e) {
 	 // Stop acting like a button
 	e.preventDefault();
-	// Get the field name
-	fieldName = $(this).attr('field');
 	// Get its current value
 	var currentVal = parseInt($('input[name='+fieldName+']').val());
 	// If it isn't undefined or its greater than 0

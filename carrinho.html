@@ -8,18 +8,12 @@
 		<meta name="viewport" content="initial-scale=1, width=device-width, height=device-height, viewport-fit=cover">
 		
 		<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src * 'unsafe-inline'; media-src *" />
-	
+		
 		<script src="js/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="style.css" />
-
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-		<script src="js/owl.carousel.js"></script>
-		<script src="js/jquery.sticky.js"></script>
 		<script src="js/jquery-cookie.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-js/1.3.0/sticky.min.js"></script>
 		<script src="custom.js"></script>
+				
+		<link rel="stylesheet" type="text/css" href="style.css" />
 		
 		<title>E-Pedido</title>
 
@@ -31,24 +25,47 @@
 				"use strict";
 				
 				
-				if(Cookies.get('carrinho').length === 0){
+				if(Cookies.get('carrinho') === '[]'){
 					
 					console.log('vazio')
+					console.log(Cookies.get('carrinho'))
+					$('.carrinho').html('<div class="row cart"><div class="col-12"><p>Seu carrinho está vazio</p></div></div>');
+					
 					
 				} else {
-					var url = Cookies.get('carrinho'); 
+					var url = $.parseJSON(Cookies.get('carrinho')); 
 
 					console.log(url)
-					$.getJSON(url,function(result){
-						$.each(result, function(i, field){
+					
+					var total = 0;
+					
+					$.each(url, function(i, field) {
+						var preco = parseFloat(field.preco);
+						var moeda = preco.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"});
+						var nome = field.nome;
+						var img = field.imagem;
+						var qtde = field.qtde;
 
-							var preco = 'R$ ' + field.preco_padrao;
 
-							$(".product-list > .row").append('<div class="col-6"><a href="produto.html?id=' + field.codigo +'"><img src="' + field.imagem + '" alt="" /><h3>' + field.descricao + '</h3><span class="price">' + preco + '</span><span class="unid">1 ' + field.unid_medida + '</span></div></a>');
-
-						});
+						$(".carrinho").append('<div class="row cart"><div class="col-5"><img src="' + img + '" alt="" /></div><div class="col-7"><span class="nome-prod">' + nome + '</span></div><hr><div class="col-4"><span class="preco">Qtd: ' + qtde + '</span></div><div class="col-6"><span class="preco">' + moeda + '</span></div><div class="col-1"><i class="bx bx-trash" id="' + field.id + '"></i></div></div>');
+						
+						var totalparc = parseFloat(field.preco) * parseFloat(field.qtde);
+						
+						total += totalparc;
+						
 					});
+					
+					$(".carrinho").append('<div class="alert alert-warning" role="alert">Total no carrinho: ' + total.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}) + '</div>');
+					
+					$(".carrinho").append('<a href="finalizar.html" class="btn">Finalizar Compra</a>');
+					
 				}
+				
+			});
+			
+			$(document).on('click', '.bx-trash', function() {
+				
+				console.log($(this).attr('id'))
 				
 			});
 		</script>
@@ -65,24 +82,8 @@
 						<div class="title"><h2>Carrinho</h2></div>
 					</div>
 				</div>
-				<div class="row cart">
-					<div class="col-12">
-						<p>Seu carrinho está vazio</p>
-					</div>
-				</div>
-				<div class="row cart">
-					<div class="col-5"><img src="https://dev.asasys.com.br/temp/ecommerce/sem-foto.jpg" alt="" /></div>
-					<div class="col-7">
-						<span class="nome-prod">ACAI 250ML COPO</span>
-					</div>
-					<hr>
-					<div class="col-4">
-						<input type="text" name="quantity" id="qty" value="1" class="qty" /><br>
-					</div>
-					<div class="col-6">
-						<span class="preco">R$ 6,00</span>
-					</div>
-					<div class="col-1"><i class="bx bx-trash"></i></div>
+				<div class="carrinho">
+					
 				</div>
 			</div>
 			

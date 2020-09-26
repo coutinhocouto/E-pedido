@@ -99,9 +99,11 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 
 label.error {color: #f00; font-size: 12px; margin-bottom: 15px; margin-top: -5px; display: block;}
 
-.cart {background: #fff; padding: 10px;}
+.cart {background: #fff; padding: 10px; margin-bottom: 20px;}
 .cart .nome-prod {display: flex; justify-content: center; align-items: center; height: 70px; font-size: 13px;}
 .cart .preco {text-align: center; display: block; font-size: 12px;}
+
+#loader {display: none;}
 
 @media screen and (max-width: 750px) {
     iframe {
