@@ -64,6 +64,10 @@
 					minlength: "O telefone está incompleto.",
 				});
 				
+				$("#validate").submit(function(e){
+					e.preventDefault();
+				});
+				
 				$('#validate').validate({
 				  rules: {
 					  nome: {	required: true},
@@ -74,15 +78,14 @@
 					  cpass: {  equalTo: "#pass"}
 				  },
 				  submitHandler: function(form) {
+					  
 					var nome = $("#nome").val();
-					email = $("#email").val();
-					telefone = $("#telefone").val();
-					cpf = $("#cpf").val();
-					pass = $.md5($("#pass").val(), 'asasys');
+					var email = $("#email").val();
+					var telefone = $("#telefone").val();
+					var cpf = $("#cpf").val();
+					var pass = $.md5($("#pass").val(), 'asasys');
 					
-					console.log(pass);
-					
-					var dataString='fn=setCliente&data={"cnpj":"' + cnpj + '", "hashKey":"' + hash + '", "acao":"I", "id": "' + cpf + '", "pass":"' + pass + '", "uid":"' + Cookies.get('player') + '", "cpf": "' + cpf + '", "email": "' + email + '",  "nome":"' + nome + '", "telefone":"' + telefone + '"}';
+					var dataString = 'fn=setCliente&data={"cnpj":"' + cnpj + '", "hashKey":"' + hash + '", "acao":"I", "id": "' + cpf + '", "pass":"' + pass + '", "uid":"' + Cookies.get('player') + '", "cpf": "' + cpf + '", "email": "' + email + '",  "nome":"' + nome + '", "telefone":"' + telefone + '"}';
 
 					console.log(dataString);
 
@@ -102,9 +105,6 @@
 						}
 					});
 				  }
-				});
-				$("#validate").submit(function(e){
-					e.preventDefault();
 				});
 				
 			});
