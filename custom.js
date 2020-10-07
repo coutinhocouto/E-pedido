@@ -2,9 +2,13 @@ $(document).ready(function(){
 	
 	if(typeof Cookies.get('carrinho') == 'undefined' ) {
 		var carrinho = [];
+		var carrinhofim = [];
 
 		Cookies.set('carrinho', JSON.stringify(carrinho), { expires: 1 });
 		console.log(Cookies.get('carrinho'));
+		
+		Cookies.set('carrinhofim', JSON.stringify(carrinhofim), { expires: 1 });
+		console.log(Cookies.get('carrinhofim'));
 	}
 	
     $("header").sticky({topSpacing:0});

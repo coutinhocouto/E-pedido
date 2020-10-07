@@ -49,9 +49,9 @@ header { background: #EEF2F5; padding-top: 10px; z-index: 99 !important;}
 
 /* --------- COLORS --------- */
 
-.product-list i, footer a.big, .sidenav, .single_add_to_cart_button, .btn {background: #FFB300;}
+.product-list i, footer a.big, .sidenav, .single_add_to_cart_button, .btn, #myacc a, #fechar {background: #FFB300;}
 .product-list .price, footer a:hover, .prod-title, .minus, .plus {color: #FFB300;}
-.qtyminus, .qtyplus {border: 1px solid #FFB300;}
+.qtyminus, .qtyplus, #fechar {border: 1px solid #FFB300;}
 
 /* -------------------------- */
 
@@ -104,6 +104,19 @@ label.error {color: #f00; font-size: 12px; margin-bottom: 15px; margin-top: -5px
 .cart .preco {text-align: center; display: block; font-size: 12px;}
 
 #loader {display: none;}
+
+#myacc {list-style: none;}
+#myacc a {display: block; padding: 15px; color: #fff; margin-bottom: 10px; border-radius: 10px 50px 50px 10px; font-weight: 700;}
+#myacc i {font-size: 25px; vertical-align: bottom; margin-right: 10px;}
+
+.finalizar h4 {font-weight: 700; margin: 20px 0; border-bottom: 1px dashed #000; padding-bottom: 20px;}
+.finalizar label, .finalizar input, .finalizar select {width: 100%; margin-bottom: 5px;}
+.finalizar input, .finalizar select {width: 100%; margin-bottom: 10px;}
+
+#resumo {background: #ccc; padding: 15px; border-radius: 5px; border: 1px solid #999; margin-top: 20px; font-size: 13px;}
+#resumo h5 {font-weight: 700; margin-bottom: 10px;font-size: 16px;}
+
+#fechar {width: 100%; padding: 5px;}
 
 @media screen and (max-width: 750px) {
     iframe {

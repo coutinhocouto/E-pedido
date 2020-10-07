@@ -61,9 +61,18 @@
 				
 			});
 			
+			
+			function removerPela(chave, valor){
+				meuJSON = $.parseJSON(Cookies.get('carrinho')).filter(function(jsonObject) {
+					return jsonObject[chave] != valor;
+				});
+				Cookies.set('carrinho', JSON.stringify(meuJSON), { expires: 1 });
+			}
+			
 			$(document).on('click', '.bx-trash', function() {
 				
-				console.log($(this).attr('id'))
+				removerPela("id",$(this).attr('id'))
+				$(this).parent().parent().remove();
 				
 			});
 		</script>

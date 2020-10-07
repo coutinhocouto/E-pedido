@@ -21,8 +21,9 @@
 
 			$(document).ready(function(){
 				
+				if(typeof Cookies.get('user') == 'undefined' ) { } else { window.location.replace("minha-conta.html"); }
+				
 				$("#entrar").click(function(){
-					
 					
 					var email = $("#email").val(); 
 					pass = $.md5($("#pass").val(), 'asasys');

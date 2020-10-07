@@ -23,25 +23,37 @@
 				
 				console.log(Cookies.get('carrinho'))
 
-				var url = 'https://dev.asasys.com.br/app/app.php?fn=getProduto&data={"cnpj":"' + cnpj + '","hashKey":"' + hash + '", "page":1,  "filtro":{"codigo":"'  + getParameterByName('id') + '"}}'; 
+				var url = '';
+				
+				if(getParameterByName('id')) {
+					url = 'https://dev.asasys.com.br/app/app.php?fn=getProduto&data={"cnpj":"' + cnpj + '","hashKey":"' + hash + '", "page":1,  "filtro":{"codigo":"'  + getParameterByName('id') + '"}}'; 
+				} else {
+					url = 'https://dev.asasys.com.br/app/app.php?fn=getProduto&data={"cnpj":"' + cnpj + '","hashKey":"' + hash + '", "page":1,  "filtro":{"codigo":"'  + getParameterByName('codigo') + '"}}'; 
+				}
 				
 				console.log(url)
 				$.getJSON(url,function(result){
-					$.each(result, function(i, field){
+					if(result.status) {
 						
-						$(".produto .row #imagem-desc").html('<div style=" background: url(' + field.imagem + ') center center; background-size: cover; height: 300px; width: 100%; display: block;"></div>');
+						$('.produto').html('<div style="background: #c22121; padding: 10px; border-radius: 5px; color: #fff;  margin-bottom: 20px;">O produto que você está procurando não foi encontrado, pedimos que tente novamente ou entre em contato conosco.</div>')
 						
-						$(".produto .row #info").html('<div class="col-12"><div><h3 class="prod-title">' + field.descricao + '</h3><h4 class="prod-price">' + parseFloat(field.preco_padrao).toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}) + '</h4><div class="buy"></div></div></div>');
-						
-						$(".buy").html('<form class="cart" action="" method="post" enctype="multipart/form-data"><div class="quantity"><input type="button" value="-" class="qtyminus" field="quantity" /><input type="text" name="quantity" id="qty" value="1" class="qty" /><input type="button" value="+" class="qtyplus" field="quantity" /></div><button type="submit" name="add-to-cart" value="260" class="single_add_to_cart_button button alt"><i class="bx bxs-cart-add"></i> Comprar</button></form>');
-						
-						$(".produto .row #desc").html('<div class="col-12 desc"><h3>Descrição</h3></div>');
-						
-						$('#preco').val(field.preco_padrao);
-						$('#nome').val(field.descricao);
-						$('#imagem').val(field.imagem);
-						
-					});
+					} else {
+						$.each(result, function(i, field){
+
+							$(".produto .row #imagem-desc").html('<div style=" background: url(' + field.imagem + ') center center; background-size: cover; height: 300px; width: 100%; display: block;"></div>');
+
+							$(".produto .row #info").html('<div class="col-12"><div><h3 class="prod-title">' + field.descricao + '</h3><h4 class="prod-price">' + parseFloat(field.preco_padrao).toLocaleString("pt-BR", { style: "currency" , currency:"BRL"}) + '</h4><div class="buy"></div></div></div>');
+
+							$(".buy").html('<form class="cart" action="" method="post" enctype="multipart/form-data"><div class="quantity"><input type="button" value="-" class="qtyminus" field="quantity" /><input type="text" name="quantity" id="qty" value="1" class="qty" /><input type="button" value="+" class="qtyplus" field="quantity" /></div><button type="submit" name="add-to-cart" value="260" class="single_add_to_cart_button button alt"><i class="bx bxs-cart-add"></i> Comprar</button></form>');
+
+							$(".produto .row #desc").html('<div class="col-12 desc"><h3>Descrição</h3></div>');
+
+							$('#preco').val(field.preco_padrao);
+							$('#nome').val(field.descricao);
+							$('#imagem').val(field.imagem);
+
+						});
+					}
 				});
 				
 			});
@@ -58,14 +70,18 @@
 				
 				
 				carrinhoadd = $.parseJSON(Cookies.get('carrinho'))
-				
 				carrinhoadd.push(
 					{ 'id' : id, 'qtde' : qty, 'preco' : preco, 'nome' : nome, 'imagem' : imagem}
 				);
 				Cookies.set('carrinho', JSON.stringify(carrinhoadd), { expires: 1 });
-					
-				console.log(carrinhoadd);
-				console.log(Cookies.get('carrinho'));
+				
+				carrinhoaddfim = $.parseJSON(Cookies.get('carrinhofim'))
+				carrinhoaddfim.push(
+					{"codigo":id,"qtde":qty,"preco":preco}
+				);
+				Cookies.set('carrinhofim', JSON.stringify(carrinhoaddfim), { expires: 1 });
+				
+				console.log(Cookies.get('carrinhofim'))
 				
 				$('#alert').html('<div class="alert alert-success" role="alert">Produto adicionado</div>');
 				$(window).scrollTop($('.search-top').offset().top);
