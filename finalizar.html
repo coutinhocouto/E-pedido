@@ -67,20 +67,21 @@
 				if(typeof Cookies.get('user') == 'undefined' ) { window.location.replace("login.html"); }
 				
 				var nome = $("#nome").val();
-				email = $("#email").val();
-				telefone = $("#telefone").val();
-				cpf = $("#cpf").val();
-				numero = $("#numero").val();
-				nome_do_logradouro = $("#nome_do_logradouro").val();
-				numero = $("#numero").val();
-				complemento = $("#complemento").val();
-				bairro = $("#bairro").val();
-				uf = $("#uf").val();
-				tipo = $("#tipo").val();
-				valor = $("#valor").val();
-				cep = $("#cep").val();
-				municipio = $("#municipio").val();
-				troco = $("#troco").val();
+				var email = $("#email").val();
+				var telefone = $("#telefone").val();
+				var cpf = $("#cpf").val();
+				var numero = $("#numero").val();
+				var nome_do_logradouro = $("#nome_do_logradouro").val();
+				var numero = $("#numero").val();
+				var complemento = $("#complemento").val();
+				var bairro = $("#bairro").val();
+				var uf = $("#uf").val();
+				var tipo = $("#tipo").val();
+				var valor = $("#valor").val();
+				var cep = $("#cep").val();
+				var municipio = $("#municipio").val();
+				var troco = $("#troco").val();
+				var referencia = $("#referencia").val();
 				
 				var cliente = 'https://dev.asasys.com.br/app/app.php?fn=getCliente&data={"cnpj":"' + cnpj + '", "hashKey":"' + hash + '", "pass":"' + Cookies.set('pass') + '", "email": "' + Cookies.set('user') + '"}'; 
 				
@@ -143,9 +144,6 @@
 				});
 				
 				var url = $.parseJSON(Cookies.get('carrinho')); 
-
-				console.log(url)
-
 				var total = 0;
 
 				$.each(url, function(i, field) {
@@ -165,6 +163,7 @@
 				});
 
 				$("#resumo").append('<br><strong>Total: R$ ' + total.toLocaleString("pt-BR", { style: "currency" , currency:"BRL"} + '</strong>'));	
+				$('#valor').val(total)
 				
 				$( "#tipo" ).change(function() {
 					$('#troco').val('');
@@ -179,6 +178,7 @@
 				
 				$('#cpf').mask('00000000000');
 				$('#telefone').mask('00000000000');
+				$('#cep').mask('00000000');
 				
 				$("#validate").submit(function(e){
 					e.preventDefault();
@@ -200,13 +200,13 @@
 				  },
 				  submitHandler: function(form) {
 					
-					var dataString = '{"cnpj":"' + cnpj + '","hashKey":"' + hash + '","unidade": 1,"cliente": {"id":"' + Cookies.get('id') + '","cpf":"' + cpf + '","nome":"' + nome + '","telefone":"' + telefone + '"},"endereco": {"polo":2,"CEP":"' + cep + '","tipo_logradouro":"","telefone":"' + telefone + '","nome_do_logradouro": "' + nome_do_logradouro + '","numero": "' + numero + '","complemento": "' + complemento + '","bairro": "' + bairro + '","municipio": "' + municipio + '","uf": "' + uf + '","referencia": "","situacao": "A"},"pagamento": [{"tipo":' + tipo + ',"valor":' + valor + ',"troco":' + troco + '}],"produto": ' + Cookies.get('carrinhofim') + '}';
+					//polo vazio
 					  
-					$('#teste').html(dataString);
+					var dataString = 'fn=setPedido&data={"cnpj":"' + cnpj + '","hashKey":"' + hash + '","unidade": 1,"cliente": {"id":"' + Cookies.get('id') + '","cpf":"' + cpf + '","nome":"' + nome + '","telefone":"' + telefone + '"},"endereco": {"polo":,"CEP":"' + cep + '","tipo_logradouro":"","telefone":"' + telefone + '","nome_do_logradouro": "' + nome_do_logradouro + '","numero": "' + numero + '","complemento": "' + complemento + '","bairro": "' + bairro + '","municipio": "' + municipio + '","uf": "' + uf + '","referencia": "' + referencia + '","situacao": "A"},"pagamento": [{"tipo":' + tipo + ',"valor":' + valor + ',"troco":' + troco + '}],"produto": ' + Cookies.get('carrinhofim') + '}';
 					  
 					console.log(dataString);
 
-					/*$.ajax({
+					$.ajax({
 						type:"POST",							
 						url:"https://dev.asasys.com.br/app/app.php",
 						data: dataString,
@@ -220,7 +220,7 @@
 							console.log('funcionou');
 							//window.location.replace("obrigado.html");
 						}
-					});*/
+					});
 				  }
 				});
 				
@@ -245,15 +245,15 @@
 							<label>Nome</label>
 							<input type="text" id="nome" name="nome" value="" class="form-control" />
 							<label>CPF</label>
-							<input type="text" id="cpf" name="cpf" value="" class="form-control" />
+							<input type="number" id="cpf" name="cpf" value="" class="form-control" />
 							<label>Telefone</label>
-							<input type="text" id="telefone" name="telefone" value="" class="form-control" />
+							<input type="number" id="telefone" name="telefone" value="" class="form-control" />
 							<label>CEP</label>
-							<input type="text" id="cep" name="cep" value="" class="form-control" />
+							<input type="number" id="cep" name="cep" value="" class="form-control" />
 							<label>Endereço</label>
 							<input type="text" id="nome_do_logradouro" name="nome_do_logradouro" value="" class="form-control" />
 							<label>Número</label>
-							<input type="text" id="numero" name="numero" value="" class="form-control" />
+							<input type="number" id="numero" name="numero" value="" class="form-control" />
 							<label>Complemento</label>
 							<input type="text" id="complemento" name="complemento" value="" class="form-control" />
 							<label>Bairro</label>
@@ -292,6 +292,8 @@
 								<option value="TO">Tocantins</option>
 								<option value="EX">Estrangeiro</option>
 							</select>
+							<label>Referência</label>
+							<textarea id="referencia" class="form-control"></textarea>
 
 							<div id="resumo">
 								<h5>Resumo do seu pedido</h5>
@@ -307,10 +309,7 @@
 							<input type="text" style="display: none;" id="troco" name="troco" value="" class="form-control" />
 
 							<button id="fechar">Finalizar pedido</button>
-							
-							<div id="teste">
-							
-							</div>
+						
 						</form>
 					</div>
 				</div>
